@@ -25,7 +25,6 @@ async function analisarChave() {
         return;
     }
 
-    // 1. Cortando as partes
     let ufCodigo = chave.substring(0, 2);
     let anoMes = chave.substring(2, 6);
     let cnpj = chave.substring(6, 20);
@@ -35,16 +34,12 @@ async function analisarChave() {
     let emissao = chave.substring(34, 35);
     let codNum = chave.substring(35, 43);
     let dv = chave.substring(43, 44);
-
-    // 2. Melhorando a visualização dos dados
-    
-    // Verifica se o estado existe na tabela. Se sim, junta o código + nome. Se não, mostra só o código.
+   
     let ufNome = tabelaEstados[ufCodigo] ? ufCodigo + " - " + tabelaEstados[ufCodigo] : ufCodigo; 
     
-    // Faz a mesma coisa para o modelo
     let modeloNome = tabelaModelos[modeloCodigo] ? modeloCodigo + " - " + tabelaModelos[modeloCodigo] : modeloCodigo;
 
-    // Formata a data de "2304" para "04/2023"
+
     let ano = "20" + anoMes.substring(0, 2); 
     let mes = anoMes.substring(2, 4); 
     let dataFormatada = mes + "/" + ano;
