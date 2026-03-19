@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Separador de Chave de Acesso</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Análise de Chave (44 dígitos)</h2>
+        
+        <label for="chaveInput">Cole sua chave aqui:</label>
+        <input type="text" id="chaveInput" maxlength="44" placeholder="Ex: 35230112345678000123550010001234561001234567">
+        
+        <button onclick="analisarChave()">Separar Dados</button>
+
+        <div id="resultado" class="escondido">
+            <p><strong>Estado (UF):</strong> <span id="resUf"></span></p>
+            <p><strong>Ano/Mês:</strong> <span id="resData"></span></p>
+            <p><strong>CNPJ:</strong> <span id="resCnpj"></span></p>
+            <p><strong>Modelo:</strong> <span id="resModelo"></span></p>
+            <p><strong>Série:</strong> <span id="resSerie"></span></p>
+            <p><strong>Número da Nota:</strong> <span id="resNumero"></span></p>
+            <p><strong>Forma de Emissão:</strong> <span id="resEmissao"></span></p>
+            <p><strong>Código Numérico:</strong> <span id="resCodNum"></span></p>
+            <p><strong>Dígito Verificador:</strong> <span id="resDv"></span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
