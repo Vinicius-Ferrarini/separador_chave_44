@@ -22,7 +22,7 @@ input {
     border-radius: 4px;
 }
 
-button {
+.btn-principal {
     width: 100%;
     padding: 10px;
     background-color: #007BFF;
@@ -33,7 +33,7 @@ button {
     font-weight: bold;
 }
 
-button:hover {
+.btn-principal:hover {
     background-color: #0056b3;
 }
 
@@ -47,7 +47,103 @@ button:hover {
     border-top: 1px solid #eee;
 }
 
-#resultado p {
-    margin: 5px 0;
+/* Novo estilo das linhas de resultado com borda colorida */
+.linha-dado {
+    margin: 8px 0;
+    padding: 10px 12px;
+    background-color: #fcfcfc;
+    border-width: 2px;
+    border-style: solid; 
+    border-radius: 6px;
+    color: #333;
+    font-size: 15px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Estilos da área de teste */
+.area-teste {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.area-teste p {
+    margin: 0 0 8px 0;
+    color: #666;
+}
+
+/* Container para alinhar a chave e o ícone de copiar */
+.chave-inline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e9ecef;
+    padding: 8px 12px;
+    border-radius: 6px;
+    gap: 10px;
+}
+
+.chave-inline code {
+    font-weight: bold;
+    word-break: break-all;
+    font-size: 13px;
     color: #333;
 }
+
+/* Estilo do botão de ícone (Cópia) */
+.btn-icone {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.btn-icone:hover {
+    background-color: #d0d4d8;
+    color: #000;
+}
+
+/* Estilos da visualização colorida da chave */
+.chave-visual {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2px;
+    margin-bottom: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.box {
+    border: 2px solid #ccc;
+    padding: 2px 4px;
+    background: #fff;
+}
+
+/* Cores que se aplicam tanto na chave visual quanto nas linhas de resultado */
+.box-uf { border-color: #e67e22; }       
+.box-data { border-color: #2980b9; }     
+.box-cnpj { border-color: #27ae60; }     
+.box-modelo { border-color: #c0392b; }   
+.box-serie { border-color: #7f8c8d; }    
+.box-numero { border-color: #f39c12; }   
+.box-emissao { border-color: #8e44ad; }  
+.box-codnum { border-color: #2c3e50; }   
+.box-dv { border-color: #3498db; }       
+
+hr {
+    border: 0;
+    border-top: 1px solid #eee;
+    margin: 20px 0;
+}
+
