@@ -101,4 +101,3 @@ async function analisarChave() {
         document.getElementById("resRazaoSocial").innerText = "Erro ao buscar CNPJ na base de dados.";
     }
 }
-
