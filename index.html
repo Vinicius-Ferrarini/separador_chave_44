@@ -27,7 +27,7 @@
         </div>
         
         <label for="chaveInput">Cole sua chave aqui:</label>
-        <input type="text" id="chaveInput" maxlength="44" placeholder="Cole os 44 números aqui...">
+        <input type="text" id="chaveInput" maxlength="44" placeholder="Cole os 44 números aqui..." inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
         
         <button class="btn-principal" onclick="analisarChave()">Separar Dados</button>
 
