@@ -9,6 +9,19 @@
 </head>
 <body>
 
+    <!-- Menu lateral com o histórico de chaves pesquisadas, colado na parede esquerda -->
+    <aside class="sidebar">
+        <h3>🕘 Histórico</h3>
+
+        <div class="acoes-historico">
+            <button class="btn-historico" onclick="baixarHistoricoCSV()" title="Baixar tudo em CSV">⬇️ Baixar CSV</button>
+            <button class="btn-historico btn-limpar" onclick="limparHistorico()" title="Apagar todo o histórico">🗑️ Limpar lista</button>
+        </div>
+
+        <ul id="listaHistorico" class="lista-historico"></ul>
+        <p id="historicoVazio" class="historico-vazio">📭 Nenhuma chave salva ainda.</p>
+    </aside>
+
     <div class="container">
         <h2>Análise de Chave (44 dígitos)</h2>
         
@@ -32,6 +45,8 @@
         <button class="btn-principal" onclick="analisarChave()">Separar Dados</button>
 
         <div id="resultado" class="escondido">
+            <p id="statusChaveGeral" class="status-dv"></p>
+
             <!-- Nova Área: Visualização colorida da chave -->
             <div id="chaveVisual" class="chave-visual">
                 <span id="visUf" class="box box-uf" title="UF"></span>
@@ -48,16 +63,34 @@
             <hr>
 
             <!-- Textos explicativos com as bordas coloridas ligadas à chave -->
-            <p class="linha-dado box-uf"><strong>Estado (UF):</strong> <span id="resUf"></span></p>
+            <p class="linha-dado box-uf"><strong>Estado (UF):</strong> <span id="resUf"></span> <span id="statusUf" class="nota-validacao"></span></p>
             <p class="linha-dado box-data"><strong>Ano/Mês:</strong> <span id="resData"></span></p>
-            <p class="linha-dado box-cnpj"><strong>CNPJ:</strong> <span id="resCnpj"></span></p>
+            <p class="linha-dado box-cnpj"><strong>CNPJ:</strong> <span id="resCnpj"></span> <span id="statusCnpj" class="nota-validacao"></span></p>
             <p class="linha-dado box-cnpj"><strong>Razão Social:</strong> <span id="resRazaoSocial"></span></p>
-            <p class="linha-dado box-modelo"><strong>Modelo:</strong> <span id="resModelo"></span></p>
+
+            <p id="statusDivergenciaUf" class="status-dv escondido"></p>
+
+            <p class="linha-dado box-modelo"><strong>Modelo:</strong> <span id="resModelo"></span> <span id="statusModelo" class="nota-validacao"></span></p>
             <p class="linha-dado box-serie"><strong>Série:</strong> <span id="resSerie"></span></p>
             <p class="linha-dado box-numero"><strong>Número da Nota:</strong> <span id="resNumero"></span></p>
             <p class="linha-dado box-emissao"><strong>Forma de Emissão:</strong> <span id="resEmissao"></span></p>
             <p class="linha-dado box-codnum"><strong>Código Numérico:</strong> <span id="resCodNum"></span></p>
             <p class="linha-dado box-dv"><strong>Dígito Verificador:</strong> <span id="resDv"></span></p>
+
+            <p id="statusDv" class="status-dv"></p>
+
+            <div class="area-teste">
+                <p>Chave para copiar e colar:</p>
+                <div class="chave-inline">
+                    <code id="chaveResultado"></code>
+                    <button class="btn-icone" id="btnCopiarResultado" onclick="copiarChave('chaveResultado', 'btnCopiarResultado')" title="Copiar chave">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
