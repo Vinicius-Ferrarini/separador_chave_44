@@ -54,11 +54,15 @@ const tabelaEmissoesPorModelo = {
     '66': emissoesOffline
 };
 
-function descreverEmissao(modelo, codigo) {
+function descreverEmissao(modelo, codigo, compacta = false) {
     // A chave do SAT tem outro leiaute e não contém tpEmis na posição 35.
-    if (modelo === '59') return 'Não informada na chave do CF-e-SAT (leiaute próprio)';
+    if (modelo === '59') return compacta ? 'Não informada' : 'Não informada na chave do CF-e-SAT (leiaute próprio)';
     const tabela = tabelaEmissoesPorModelo[modelo];
     const descricao = tabela && Object.prototype.hasOwnProperty.call(tabela, codigo) ? tabela[codigo] : null;
+    if (compacta) {
+        if (!descricao) return 'Não reconhecida';
+        return descricao.split(' (')[0].replace('Emissão normal', 'Normal');
+    }
     return codigo + ' - ' + (descricao || 'Forma de emissão não reconhecida para este modelo; confira o XML');
 }
 
@@ -231,9 +235,9 @@ async function analisarChave() {
     document.getElementById("resModelo").innerText = modeloNome;
     document.getElementById("resSerie").innerText = serie;
     document.getElementById("resNumero").innerText = numero; 
-    document.getElementById("resEmissao").innerText = descreverEmissao(modeloCodigo, emissao);
+    document.getElementById("resEmissao").innerText = descreverEmissao(modeloCodigo, emissao, true);
+    document.getElementById("resEmissao").title = descreverEmissao(modeloCodigo, emissao);
     document.getElementById("visEmissao").title = descreverEmissao(modeloCodigo, emissao);
-    document.getElementById("resAmbiente").innerText = "Não identificável apenas pela chave. Consulte o campo tpAmb no XML: 1 = Produção; 2 = Homologação (teste). Emissão normal também pode ocorrer em homologação.";
     document.getElementById("resCodNum").innerText = codNum;
     document.getElementById("resDv").innerText = dv;
     

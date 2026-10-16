@@ -27,7 +27,9 @@ Se você não tiver uma chave em mãos agora, copie a chave de teste abaixo e co
 
 ## 🛠️ Tecnologias
 
-O ambiente **Produção ou Homologação não faz parte da chave de acesso**. A ferramenta explica como conferir o campo `tpAmb` no XML: `1` = Produção e `2` = Homologação. O código de emissão `1` significa emissão normal e não identifica o ambiente.
+O resultado mostra a forma de emissão de maneira compacta: **Normal**, **Contingência FS-IA**, **Contingência off-line**, entre outras. Os detalhes e o código aparecem ao passar o mouse sobre a forma de emissão.
+
+O ambiente **Produção ou Homologação não faz parte da chave de acesso**. Para identificá-lo, consulte o campo `tpAmb` no XML: `1` = Produção e `2` = Homologação. O código de emissão `1` significa emissão normal e não identifica o ambiente.
 
 A descrição da emissão considera o modelo do documento e avisa quando o código não é reconhecido. No CF-e-SAT (59), a chave tem leiaute próprio e não contém esse campo; a ferramenta não interpreta o dígito da posição 35 como forma de emissão.
 
