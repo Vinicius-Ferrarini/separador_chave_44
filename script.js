@@ -22,7 +22,7 @@ const tabelaModelos = {
     '67': 'CT-e OS (Conhecimento de Transporte Eletrônico para Outros Serviços)'
 };
 
-// tpEmis descreve a forma de emissão; tpAmb (produção/homologação) só consta no XML.
+// tpEmis identifica a forma de emissão na chave de acesso.
 // Os códigos têm significados diferentes conforme o modelo do documento.
 const emissoesNFe = {
     '1': 'Emissão normal',
@@ -63,7 +63,7 @@ function descreverEmissao(modelo, codigo, compacta = false) {
         if (!descricao) return 'Não reconhecida';
         return descricao.split(' (')[0].replace('Emissão normal', 'Normal');
     }
-    return codigo + ' - ' + (descricao || 'Forma de emissão não reconhecida para este modelo; confira o XML');
+    return codigo + ' - ' + (descricao || 'Forma de emissão não reconhecida para este modelo');
 }
 
 // Função para copiar a chave com a troca de ícone animada
