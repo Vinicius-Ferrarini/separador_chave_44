@@ -22,6 +22,46 @@ const tabelaModelos = {
     '67': 'CT-e OS (Conhecimento de Transporte Eletrônico para Outros Serviços)'
 };
 
+// tpEmis descreve a forma de emissão; tpAmb (produção/homologação) só consta no XML.
+// Os códigos têm significados diferentes conforme o modelo do documento.
+const emissoesNFe = {
+    '1': 'Emissão normal',
+    '2': 'Contingência FS-IA (Formulário de Segurança)',
+    '3': 'Regime Especial NFF (Nota Fiscal Fácil; SCAN em leiautes antigos)',
+    '4': 'Contingência EPEC (Evento Prévio de Emissão em Contingência)',
+    '5': 'Contingência FS-DA (Formulário de Segurança do Documento Auxiliar)',
+    '6': 'Contingência SVC-AN (SEFAZ Virtual do Ambiente Nacional)',
+    '7': 'Contingência SVC-RS (SEFAZ Virtual do Rio Grande do Sul)',
+    '9': 'Contingência off-line'
+};
+const emissoesCTe = {
+    '1': 'Emissão normal',
+    '3': 'Regime Especial NFF (Nota Fiscal Fácil)',
+    '4': 'Contingência EPEC (Evento Prévio de Emissão em Contingência)',
+    '5': 'Contingência FS-DA (Formulário de Segurança do Documento Auxiliar)',
+    '7': 'Contingência SVC-RS (SEFAZ Virtual do Rio Grande do Sul)',
+    '8': 'Contingência SVC-SP (SEFAZ Virtual de São Paulo)'
+};
+const emissoesOffline = { '1': 'Emissão normal', '2': 'Contingência off-line' };
+const tabelaEmissoesPorModelo = {
+    '55': emissoesNFe,
+    '65': { '1': emissoesNFe['1'], '4': emissoesNFe['4'], '9': emissoesNFe['9'] },
+    '57': emissoesCTe,
+    '67': { '1': emissoesCTe['1'], '5': emissoesCTe['5'], '7': emissoesCTe['7'], '8': emissoesCTe['8'] },
+    '58': { '1': 'Emissão normal', '2': 'Contingência', '3': 'Regime Especial NFF (Nota Fiscal Fácil)' },
+    '62': emissoesOffline,
+    '63': emissoesOffline,
+    '66': emissoesOffline
+};
+
+function descreverEmissao(modelo, codigo) {
+    // A chave do SAT tem outro leiaute e não contém tpEmis na posição 35.
+    if (modelo === '59') return 'Não informada na chave do CF-e-SAT (leiaute próprio)';
+    const tabela = tabelaEmissoesPorModelo[modelo];
+    const descricao = tabela && Object.prototype.hasOwnProperty.call(tabela, codigo) ? tabela[codigo] : null;
+    return codigo + ' - ' + (descricao || 'Forma de emissão não reconhecida para este modelo; confira o XML');
+}
+
 // Função para copiar a chave com a troca de ícone animada
 // idTexto: id do elemento que contém a chave / idBtn: id do botão a animar
 function copiarChave(idTexto = "chaveTeste", idBtn = "btnCopiar") {
@@ -191,7 +231,9 @@ async function analisarChave() {
     document.getElementById("resModelo").innerText = modeloNome;
     document.getElementById("resSerie").innerText = serie;
     document.getElementById("resNumero").innerText = numero; 
-    document.getElementById("resEmissao").innerText = emissao;
+    document.getElementById("resEmissao").innerText = descreverEmissao(modeloCodigo, emissao);
+    document.getElementById("visEmissao").title = descreverEmissao(modeloCodigo, emissao);
+    document.getElementById("resAmbiente").innerText = "Não identificável apenas pela chave. Consulte o campo tpAmb no XML: 1 = Produção; 2 = Homologação (teste). Emissão normal também pode ocorrer em homologação.";
     document.getElementById("resCodNum").innerText = codNum;
     document.getElementById("resDv").innerText = dv;
     
